@@ -1,25 +1,36 @@
 from django.shortcuts import render
 
+import urllib2
+import json
 # Create your views here.
 def index(request):
-    import urllib2
+
+	return render(request, 'tool.html')
+
+def result(request):
+    context = {}
     # If you are using Python 3+, import urllib instead of urllib2
-
-    import json
-
+    Pregnancies=1
+    Glucose=0
+    BloodPressure=0
+    SkinThickness=0
+    Insulin=0
+    BMI=0
+    DiabetesPedigreeFunction=0
+    Age=0
+    Outcome=1
+    DoctorComments=""
 
     data =  {
-
-            "Inputs": {
-
-                    "input1":
-                    {
-                        "ColumnNames": ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age", "Outcome"],
-                        "Values": [ [ "1", "0", "0", "0", "0", "0", "0", "0", "0" ], [ "0", "0", "0", "0", "0", "0", "0", "0", "0" ], ]
-                    },        },
-                "GlobalParameters": {
-    }
+        "Inputs": {
+            "input1":
+                {
+                    "ColumnNames": ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age", "Outcome"],
+                    "Values": [ [ Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age, Outcome]]
+                },        },
+        "GlobalParameters": {
         }
+    }
 
     body = str.encode(json.dumps(data))
 
@@ -37,7 +48,13 @@ def index(request):
         # response = urllib.request.urlopen(req)
 
         result = response.read()
+        valuesResult=result.split("\"Values\":[[")[1]
+        valuesList=valuesResult.split(",")
+        size=len(valuesList)
+        finalResultString=valuesList[size-1]
+        finalResult=finalResultString[3]+finalResultString[4]+"."+finalResultString[5]+finalResultString[6]
         print(result)
+
     except urllib2.HTTPError, error:
         print("The request failed with status code: " + str(error.code))
 
@@ -45,8 +62,18 @@ def index(request):
         print(error.info())
 
         print(json.loads(error.read()))
-	return render(request, 'tool.html')
 
-def result(request):
-    context = {}
-    return render(request, 'result.html')
+
+
+    context["Pregnancies"]=Pregnancies
+    context["Glucose"]=Glucose
+    context["BloodPressure"]=BloodPressure
+    context["SkinThickness"]=SkinThickness
+    context["Insulin"]=Insulin
+    context["BMI"]=BMI
+    context["DiabetesPedigreeFunction"]=DiabetesPedigreeFunction
+    context["Age"]=Age
+    context["Outcome"]=Outcome
+    context["DoctorComments"]=DoctorComments
+    context["Possibility"]=finalResult
+    return render(request, 'result.html',context)
