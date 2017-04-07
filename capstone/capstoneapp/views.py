@@ -10,7 +10,7 @@ import json
 # Create your views here.
 def index(request):
 
-    return render(request, 'tool.html')
+ return render(request, 'tool.html')
 
 def result(request):
 
