@@ -1,13 +1,19 @@
 from django.shortcuts import render
+from . import models
 
 import urllib2
+# If you are using Python 3+, import urllib instead of urllib2
+
 import json
+
+
 # Create your views here.
 def index(request):
 
-	return render(request, 'tool.html')
+    return render(request, 'tool.html')
 
 def result(request):
+
     context = {}
     # If you are using Python 3+, import urllib instead of urllib2
     Pregnancies=1
@@ -20,14 +26,13 @@ def result(request):
     Age=0
     Outcome=1
     DoctorComments=""
-
     data =  {
         "Inputs": {
-            "input1":
-                {
-                    "ColumnNames": ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age", "Outcome"],
-                    "Values": [ [ Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age, Outcome]]
-                },        },
+            "input1":{
+                "ColumnNames": ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age", "Outcome"],
+                "Values": [ [ Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age, Outcome]]
+            },
+        },
         "GlobalParameters": {
         }
     }
@@ -54,7 +59,6 @@ def result(request):
         finalResultString=valuesList[size-1]
         finalResult=finalResultString[3]+finalResultString[4]+"."+finalResultString[5]+finalResultString[6]
         print(result)
-
     except urllib2.HTTPError, error:
         print("The request failed with status code: " + str(error.code))
 
@@ -62,9 +66,6 @@ def result(request):
         print(error.info())
 
         print(json.loads(error.read()))
-
-
-
     context["Pregnancies"]=Pregnancies
     context["Glucose"]=Glucose
     context["BloodPressure"]=BloodPressure
