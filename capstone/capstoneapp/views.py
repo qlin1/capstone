@@ -1,18 +1,20 @@
 from django.shortcuts import render
-from . import models
+from models import *
 
 import urllib2
 # If you are using Python 3+, import urllib instead of urllib2
 
 import json
 
-
+from . import models
 # Create your views here.
 def index(request):
 
  return render(request, 'tool.html')
 
 def result(request):
+    p=Patient(patient_id="1000",first_name="Sheila",last_name="lee",gender="F",email="sheilalee@gmail.com",password="sheilalee")
+    p.save()
 
     context = {}
     # If you are using Python 3+, import urllib instead of urllib2
