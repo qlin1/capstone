@@ -28,6 +28,8 @@ class Report(models.Model):
 class Measurement(models.Model):
     patient = models.OneToOneField(Patient,on_delete=models.CASCADE)
     age = models.IntegerField(default=0, blank= True)
+    height = models.FloatField(default=0.0, blank= True)
+    weight = models.FloatField(default=0.0, blank= True)
     pregnancies = models.IntegerField(default=0, blank= True)
     glucose = models.IntegerField(default=0, blank= True)
     insulin = models.IntegerField(default=0, blank= True)
@@ -35,3 +37,4 @@ class Measurement(models.Model):
     skin_thickness = models.IntegerField(default=0, blank= True)
     bmi = models.FloatField(default=0.0, blank= True)
     diabetes_predigree_function = models.FloatField(default=0.0, blank= True)
+    heartbeat = models.IntegerField(default=0, blank= True)
