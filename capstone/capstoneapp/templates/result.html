@@ -6,12 +6,13 @@
 </head>
 <body>
     <h1 style="text-align:center">Disease Prediction and Management Application</h1>
-    <h2 style="text-align:center">Patient ID: 00001</h2>
+    <h2 style="text-align:center">Patient ID: {{patient_id}}</h2>
     <h2 style="text-align:center">Disease Type: Diabetes</h2>
     <div style="float: left">
         <h3>Disease Indicators:</h3>
 
         <p>Age: {{Age}}</p>
+        <p>Pregnancies: {{Pregnancies}}</p>
         <p>Glucose: {{Glucose}}</p>
         <p>Blood Pressure: {{BloodPressure}}</p>
         <p>Skin Thickness: {{SkinThickness}}</p>
@@ -24,7 +25,7 @@
     </div>
     <div style="float: right">
         <h3>Prediction:</h3>
-        <p>This patient has 89% of having Diabetes.</p>
+        <p>This patient has {{Possibility}}% of having Diabetes.</p>
         <br>
         <h3>Suggestion:</h3>
         <p>Giving Metformin oral or Humulin R Injection.</p>

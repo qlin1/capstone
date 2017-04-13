@@ -1,6 +1,12 @@
 from django import forms
 
 from models import *
+class PatientForm(forms.Form):
+    patientId = forms.CharField(label='patientId', max_length=20)
+
+    def clean_patientId(self):
+        patientId = self.cleaned_data['patientId']
+        return patientId
 
 class CommentForm(forms.ModelForm):
     class Meta:

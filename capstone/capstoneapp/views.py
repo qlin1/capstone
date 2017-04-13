@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from models import *
+from forms import *
 
 import urllib2
 # If you are using Python 3+, import urllib instead of urllib2
@@ -8,21 +9,37 @@ import json
 
 # Create your views here.
 def index(request):
+    context = {}
+    return render(request, 'tool.html', context)
 
- return render(request, 'tool.html')
+
 
 def result(request):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = PatientForm(request.POST)
+    else:
+        form = PatientForm()
+
+    patient_id = request.POST.get('patientId')
+    print(patient_id)
+    patient = Patient.objects.get(pk=1)
+    print(patient.first_name)
+    print(patient.last_name)
+    patient_measurement = Measurement.objects.get(pk=1)
+    print(patient_measurement.age)
+    print(patient_measurement.height)
 
     context = {}
     # If you are using Python 3+, import urllib instead of urllib2
-    Pregnancies=1
-    Glucose=0
-    BloodPressure=0
-    SkinThickness=0
-    Insulin=0
-    BMI=0
-    DiabetesPedigreeFunction=0
-    Age=0
+    Pregnancies=patient_measurement.pregnancies
+    Glucose=patient_measurement.glucose
+    BloodPressure=patient_measurement.blood_pressure
+    SkinThickness=patient_measurement.skin_thickness
+    Insulin=patient_measurement.insulin
+    BMI=patient_measurement.bmi
+    DiabetesPedigreeFunction=patient_measurement.diabetes_predigree_function
+    Age=patient_measurement.age
     Outcome=1
     DoctorComments=""
     data =  {
@@ -58,6 +75,7 @@ def result(request):
         finalResultString=valuesList[size-1]
         finalResult=finalResultString[3]+finalResultString[4]+"."+finalResultString[5]+finalResultString[6]
         print(result)
+        print(finalResult)
     except urllib2.HTTPError, error:
         print("The request failed with status code: " + str(error.code))
 
@@ -65,6 +83,7 @@ def result(request):
         print(error.info())
 
         print(json.loads(error.read()))
+    context["patient_id"]=patient_id
     context["Pregnancies"]=Pregnancies
     context["Glucose"]=Glucose
     context["BloodPressure"]=BloodPressure
