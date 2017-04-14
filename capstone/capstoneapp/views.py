@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from models import *
 from forms import *
+from django.core.urlresolvers import reverse
 
 import urllib2
 # If you are using Python 3+, import urllib instead of urllib2
@@ -12,8 +13,6 @@ def index(request):
     context = {}
     return render(request, 'tool.html', context)
 
-
-
 def result(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -21,12 +20,22 @@ def result(request):
     else:
         form = PatientForm()
 
+    #when patient_id is 00001
+    # patient_id = request.POST.get('patientId')
+    # print(patient_id)
+    # pk_id = patient_id.lstrip('0')
+    # print(pk_id)
+    # patient = Patient.objects.get(pk=pk_id)
+    # print(patient.first_name)
+    # print(patient.last_name)
+    # patient_measurement = Measurement.objects.get(pk=pk_id)
+    # print(patient_measurement.age)
+    # print(patient_measurement.height)
     patient_id = request.POST.get('patientId')
-    print(patient_id)
-    patient = Patient.objects.get(pk=1)
+    patient = Patient.objects.get(patient_id=patient_id)
     print(patient.first_name)
     print(patient.last_name)
-    patient_measurement = Measurement.objects.get(pk=1)
+    patient_measurement = Measurement.objects.get(patient=patient)
     print(patient_measurement.age)
     print(patient_measurement.height)
 
@@ -42,6 +51,7 @@ def result(request):
     Age=patient_measurement.age
     Outcome=1
     DoctorComments=""
+
     data =  {
         "Inputs": {
             "input1":{
@@ -83,6 +93,17 @@ def result(request):
         print(error.info())
 
         print(json.loads(error.read()))
+
+    # report = Report.objects.get(id=id)
+    # new_comment = request.POST.get('DoctorComments')
+    # form = CommentForm(request.POST, instance=new_comment)
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = CommentForm(request.POST)
+    else:
+        form = CommentForm()
+    # DoctorComments=request.POST.get('DoctorComments')
+
     context["patient_id"]=patient_id
     context["Pregnancies"]=Pregnancies
     context["Glucose"]=Glucose
@@ -95,4 +116,23 @@ def result(request):
     context["Outcome"]=Outcome
     context["DoctorComments"]=DoctorComments
     context["Possibility"]=finalResult
-    return render(request, 'result.html',context)
+    return render(request, 'result.html', context)
+
+def comment(request, id):
+    context={}
+    patient = Patient.objects.get(patient_id=id)
+    print(patient.first_name)
+    patient_measurement = Measurement.objects.get(patient=patient)
+    context["patient_id"]=id
+    context["Pregnancies"]=patient_measurement.pregnancies
+    context["Glucose"]=patient_measurement.glucose
+    context["BloodPressure"]=patient_measurement.blood_pressure
+    context["SkinThickness"]=patient_measurement.skin_thickness
+    context["Insulin"]=patient_measurement.insulin
+    context["BMI"]=patient_measurement.bmi
+    context["DiabetesPedigreeFunction"]=patient_measurement.diabetes_predigree_function
+    context["Age"]=patient_measurement.age
+    context["Possibility"]=request.POST.get('Possibility')
+
+    context["DoctorComments"]=request.POST.get('DoctorComments')
+    return render(request, 'final_result.html', context)
