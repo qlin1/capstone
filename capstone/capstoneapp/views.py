@@ -114,7 +114,7 @@ def result(request):
     # print(patient.last_name)
     # patient_measurement = Measurement.objects.get(pk=pk_id)
 
-    Measurement.objects.get(pk=pk_id)
+    # Measurement.objects.get(pk=pk_id)
 
     # print(patient_measurement.age)
     # print(patient_measurement.height)
@@ -215,9 +215,17 @@ def dashboard(request):
 
     return render(request, 'dashboard.html',context)
 
+def tool(request):
+    context={}
+    context['role']=request.POST['role']
+    if request.POST['role']=='D':
+        return render(request,'tool.html',context)
+    else:
+        return render(request,'patient_tool.html',context)
+
 def login(request):
     context = {}
-    return render(request, 'login.html',context)
+    return render(request,'login.html',context)
 
 def comment(request, id):
     context={}

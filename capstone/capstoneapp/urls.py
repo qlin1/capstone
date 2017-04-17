@@ -7,6 +7,7 @@ urlpatterns = [
 	#test page
 	url(r'^$', views.login),
 	url(r'^login$', views.login, name = 'login'),
+	url(r'^tool$', views.tool, name = 'tool'),
 	url(r'^index$', views.index, name = 'index'),
 	url(r'^result$', views.result, name = 'result'),
 	url(r'^comment/(?P<id>\d+)$', views.comment, name = 'comment'),
