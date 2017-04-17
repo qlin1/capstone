@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result Page</title>
+</head>
+<body>
+<h1 style="text-align:center">Disease Prediction and Management Application</h1>
+<h2 style="text-align:center">Patient ID: {{patient_id}}</h2>
+<h2 style="text-align:center">Disease Type: Diabetes</h2>
+<div style="float: left">
+    <h3>Disease Indicators:</h3>
+
+    <p>Age: {{Age}}</p>
+    <p>Pregnancies: {{Pregnancies}}</p>
+    <p>Glucose: {{Glucose}}</p>
+    <p>Blood Pressure: {{BloodPressure}}</p>
+    <p>Skin Thickness: {{SkinThickness}}</p>
+    <p>Insulin: {{Insulin}}</p>
+    <p>BMI: {{BMI}}</p>
+    <p>Diabetes Pedigree Function: {{DiabetesPedigreeFunction}}</p>
+    <h3>Doctor Comments:</h3>
+    <br>
+    <p>{{DoctorComments}}</p>
+
+</div>
+<div style="float: right">
+    <h3>Prediction:</h3>
+    <p>This patient has {{Possibility}}% of having Diabetes.</p>
+    <br>
+    <h3>Suggestion:</h3>
+    <p>Giving Metformin oral or Humulin R Injection.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+      table{
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+      table td{
+        border: 1px solid black;
+      }
+    </style>
+</head>
+
+<body>
+    <div>
+
+            <h>Disease Preiction and Management Application
+
+            <a href="login">Sign Out</a>
+
+    </div>
+    <div>
+        Patient ID:1000
+    </div>
+    <div>
+        Patient ID:Diabetes
+    </div>
+    <div>
+        <button>Disease Prediction Tool</button>
+        <button>Results</button>
+        <button>Dashboard</button>
+    </div>
+    <div>
+        <table border="1">
+            <tr>
+                <th>Report Date</th>
+                <th>Report ID</th>
+                <th>Report Link</th>
+            </tr>
+            {% for record in records %}
+            <tr>
+
+                <th class="col-md-2">
+
+                    {{ record.date }}
+
+
+                </th>
+                <th class="col-md-2">
+
+                    {{ record.report_id }}
+
+
+                </th>
+                <th>
+
+                    <a href="comment">Diabetes Report</a>
+                    {% empty %}
+
+                </th>
+            </tr>
+            {% endfor %}
+            <tr>
+
+            </tr>
+
+        </table>
+
+
+
+    </div>
+</body>
+</html>
