@@ -20,6 +20,13 @@
         <p>BMI: {{BMI}}</p>
         <p>Diabetes Pedigree Function: {{DiabetesPedigreeFunction}}</p>
         <h3>Doctor Comments:{{DoctorComments}}</h3>
+        <form action="{% url 'comment' patient_id%}" method="post">
+            <!--{{ comment.content.errors }}-->
+            <input type="text" name="DoctorComments" value="{{ form }}"><br><br><br>
+                {{ comment.content }}
+            <button type="submit" name="action">Comment</button>
+            {% csrf_token %}
+        </form>
         <br>
 
     </div>
