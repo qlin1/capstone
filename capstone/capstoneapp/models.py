@@ -18,7 +18,7 @@ class Disease(models.Model):
     parameter = models.CharField(max_length=30, default='', blank= True)
 
 class Report(models.Model):
-    patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
+    patient = models.ForeignKey('Patient', on_delete=models.CASCADE)
     report_id = models.CharField(max_length=20, default='', blank= True)
     date = models.DateField(auto_now=True)
     measurement = models.CharField(max_length=1000, default='', blank= True)
