@@ -6,8 +6,8 @@
 </head>
 <body>
     <h1 style="text-align:center">Disease Prediction and Management Application</h1>
-    <!--action="{% url 'result' %}"-->
-    <form method="post">
+
+    <form action="{% url 'result' %}" method="post">
         <label for="id_patientId">Patient ID:</label>
         <input type="text" name="patientId" value="{{ form }}"><br>
         <select name="disease">
