@@ -221,7 +221,7 @@ def tool(request):
     if request.POST['role']=='D':
         return render(request,'tool.html',context)
     else:
-        return render(request,'patient_tool.html',context)
+        return render(request,'p_dashboard.html',context)
 
 def login(request):
     context = {}
@@ -245,3 +245,7 @@ def comment(request, id):
 
     context["DoctorComments"]=request.POST.get('DoctorComments')
     return render(request, 'final_result.html', context)
+
+def p_final_result(request):
+    context={}
+    return render(request, 'p_final_result.html', context)
