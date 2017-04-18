@@ -6,7 +6,8 @@
 </head>
 <body>
     <h1 style="text-align:center">Disease Prediction and Management Application</h1>
-    <form action="{% url 'result' %}" method="post">
+    <!--action="{% url 'result' %}"-->
+    <form method="post">
         <label for="id_patientId">Patient ID:</label>
         <input type="text" name="patientId" value="{{ form }}"><br>
         <select name="disease">
@@ -16,7 +17,8 @@
             <option value="copd">Chronic Obstructive Pulmonary Disease </option>
         </select>
         <br>
-        <input type="submit" value="Calculate">
+        <input type="submit" name="calculate" value="Calculate">
+        <input type="submit" name="view" value="View Previous">
         {% csrf_token %}
     </form>
 </body>
