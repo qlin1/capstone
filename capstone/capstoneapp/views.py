@@ -22,6 +22,7 @@ def result(request):
         submit = request.POST.get('calculate',None)
     else:
         form = PatientForm()
+        submit = request.GET.get('calculate',None)
 
     if submit:
         patient_id = request.POST.get('patientId')
@@ -107,6 +108,8 @@ def result(request):
         return render(request, 'd_result.html', context)
 
     else:
+        records = Report.objects.all()
+        context["records"]=records
         return render(request, 'd_dashboard.html', context)
 
 def dashboard(request):
@@ -114,6 +117,7 @@ def dashboard(request):
     # r=Report(report_id="D100058700010",date="2017-03-28 20:20:52",measurement="Pregnancies 15 Glucose 194 BloodPressure 72 SkinThickness 35",prediction="89%",suggestion="Giving Metformin oral or Humulin r injection",comments="")
     # r.save()
     records = Report.objects.all()
+    print("@@@"+records[1])
     context["records"]=records
 
 
