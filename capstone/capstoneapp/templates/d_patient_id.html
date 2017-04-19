@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tool Page</title>
+</head>
+<body>
+    <h1 style="text-align:center">Disease Prediction and Management Application</h1>
+    <label>Patient ID:</label>
+    <form method="post" action="{% url 'tool' %}">
+        {% csrf_token %}
+        <input type="input" name="p_id" required="required" />
+        <br> </br>
+        <br> </br>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+    </form>
+</head>
+</body>
+</html>
