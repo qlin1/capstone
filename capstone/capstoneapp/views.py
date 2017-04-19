@@ -121,11 +121,11 @@ def dashboard(request):
     records = Report.objects.all()
     print("@@@"+records[1])
     context["records"]=records
-
-
     return render(request, 'd_dashboard.html',context)
-
 def tool(request):
+    return render(request,'tool.html')
+
+def role(request):
     context={}
     context['role']=request.POST['role']
     #Check the password match the username
@@ -133,8 +133,7 @@ def tool(request):
     print(request.POST['Password'])
 
     if request.POST['role']=='D':
-
-        return render(request,'tool.html',context)
+        return render(request,'d_patient_id.html',context)
     else:
         patient_id=request.POST['Username']
 
@@ -154,8 +153,6 @@ def tool(request):
 
 def login(request):
     context = {}
-    # d=Doctor(doc_id="doc_is_best",password="doc_is_best")
-    # d.save();
     return render(request,'login.html',context)
 
 def comment(request, id):
