@@ -4,6 +4,11 @@ from datetime import date
 from django.db import models
 
 # Create your models here.
+
+class Doctor(models.Model):
+    doc_id = models.CharField(max_length=20, default='', blank= True)
+    password = models.CharField(max_length=20, default='', blank= True)
+
 class Patient(models.Model):
     patient_id = models.CharField(max_length=20, default='', blank= True)
     first_name = models.CharField(max_length=30, default='', blank= True)

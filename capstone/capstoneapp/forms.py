@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 
 from models import *
 class PatientForm(forms.Form):
@@ -20,3 +21,9 @@ class CommentForm(forms.ModelForm):
             raise forms.ValidationError("the comment should be less 420 characters")
 
         return cleaned_data
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        exclude = ('password',)
+        fields = ('first_name', 'last_name','password')

@@ -2,44 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tool Page</title>
+    <title>Title</title>
+    <style type="text/css">
+      table{
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+      table td{
+        border: 1px solid black;
+      }
+    </style>
 </head>
+
 <body>
-<h1 style="text-align:center">Disease Prediction and Management Application</h1>
+<div>
+
+    <h>Disease Preiction and Management Application
+
+        <a href="login">Sign Out</a>
+
+</div>
+<div>
+    Patient ID:{{patient_id}}
+</div>
+<div>
+    <button>Dashboard</button>
+</div>
+<div>
     <table border="1">
         <tr>
             <th>Report Date</th>
             <th>Report ID</th>
-            <a href="p_final_result">Diabetes Report</a>
             <th>Report Link</th>
         </tr>
-        <!--{% for record in records %}-->
+        {% for record in records %}
         <tr>
-
-            <td class="col-md-2">
-
-                <!--{{ record.date }}-->
-                1
-
-            </td>
-            <td class="col-md-2">
-
-                <!--{{ record.report_id }}-->
-                2
-
-            </td>
-            <td>
-                3
-                <a href="p_final_result">Diabetes Report</a>
-                <!--{% empty %}-->
-
-            </td>
+            <th class="col-md-2">
+                {{ record.date }}
+            </th>
+            <th class="col-md-2">
+                {{ record.report_id }}
+            </th>
+            <th>
+                <a href="{% url 'comment' patient_id%}">Diabetes Report</a>
+                {% empty %}
+            </th>
         </tr>
-        <!--{% endfor %}-->
+        {% endfor %}
         <tr>
 
         </tr>
 
     </table>
+</div>
 </body>
 </html>

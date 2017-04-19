@@ -126,13 +126,29 @@ def dashboard(request):
 def tool(request):
     context={}
     context['role']=request.POST['role']
+    #Check the password match the username
+    print(request.POST['Username'])
+    print(request.POST['Password'])
+
     if request.POST['role']=='D':
+
         return render(request,'tool.html',context)
     else:
-        return render(request,'p_dashboard.html',context)
+        patient_id=request.POST['Username']
+
+        patient = Patient.objects.get(patient_id=patient_id)
+        if patient.password == request.POST['Password']:
+            context['patient_id']=patient_id
+            records = Report.objects.all()
+            context['records']=records
+            return render(request,'p_dashboard.html',context)
+        else:
+            return render(request,'login.html',context)
 
 def login(request):
     context = {}
+    # d=Doctor(doc_id="doc_is_best",password="doc_is_best")
+    # d.save();
     return render(request,'login.html',context)
 
 def comment(request, id):
@@ -157,3 +173,11 @@ def comment(request, id):
 def p_final_result(request):
     context={}
     return render(request, 'p_final_result.html', context)
+
+def p_dashboard(request):
+    context={}
+    records = Report.objects.all()
+    context["records"]=records
+    return render(request, 'p_dashboard.html',context)
+
+
