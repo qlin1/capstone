@@ -44,7 +44,7 @@
                 {{ record.report_id }}
             </th>
             <th>
-                <a href="{% url 'comment' patient_id%}">Diabetes Report</a>
+                <a href="{% url 'comment' record.report_id%}">Diabetes Report</a>
                 {% empty %}
             </th>
         </tr>

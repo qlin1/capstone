@@ -105,6 +105,8 @@ def result(request):
         context["Outcome"]=Outcome
         context["DoctorComments"]=DoctorComments
         context["Possibility"]=finalResult
+        r = Report(patient=patient, report_id="D100058700014",date="2017-04-20 20:20:52",measurement="Pregnancies 100 Glucose 100 BloodPressure 100 SkinThickness 100",prediction="100%",suggestion="Giving Metformin oral or Humulin r injection",comments="")
+        r.save()
         return render(request, 'd_result.html', context)
 
     else:
@@ -139,7 +141,12 @@ def tool(request):
         patient = Patient.objects.get(patient_id=patient_id)
         if patient.password == request.POST['Password']:
             context['patient_id']=patient_id
-            records = Report.objects.all()
+            records = Report.objects.filter(patient=patient).order_by('date')
+            # records = Report.objects.all()
+            # posts = Post.objects.filter(user=currentUser).order_by('-time')
+            # r = Report(patient=patient, report_id="D100058700014",date="2017-04-20 20:20:52",measurement="Pregnancies 100 Glucose 100 BloodPressure 100 SkinThickness 100",prediction="100%",suggestion="Giving Metformin oral or Humulin r injection",comments="")
+            # r.save()
+            print(records)
             context['records']=records
             return render(request,'p_dashboard.html',context)
         else:
@@ -153,20 +160,30 @@ def login(request):
 
 def comment(request, id):
     context={}
-    patient = Patient.objects.get(patient_id=1000)
-    print(patient.first_name)
-    patient_measurement = Measurement.objects.get(patient=patient)
-    context["patient_id"]=id
-    context["Pregnancies"]=patient_measurement.pregnancies
-    context["Glucose"]=patient_measurement.glucose
-    context["BloodPressure"]=patient_measurement.blood_pressure
-    context["SkinThickness"]=patient_measurement.skin_thickness
-    context["Insulin"]=patient_measurement.insulin
-    context["BMI"]=patient_measurement.bmi
-    context["DiabetesPedigreeFunction"]=patient_measurement.diabetes_predigree_function
-    context["Age"]=patient_measurement.age
-    context["Possibility"]=request.POST.get('Possibility')
+    record=Report.objects.get(report_id=id)
+    context["patient_id"]=record.patient.patient_id
+    context["Pregnancies"]=record.measurement.sub
+    context["Glucose"]=record.measurement
+    context["BloodPressure"]=record.measurement
+    context["SkinThickness"]=record.measurement
+    context["Insulin"]=record.measurement
+    context["BMI"]=record.measurement
+    context["DiabetesPedigreeFunction"]=record.measurement
+    context["Age"]=record.measurement
 
+    # patient_measurement = Measurement.objects.get(patient=patient)
+    # context["patient_id"]=id
+    # context["Pregnancies"]=patient_measurement.pregnancies
+    # context["Glucose"]=patient_measurement.glucose
+    # context["BloodPressure"]=patient_measurement.blood_pressure
+    # context["SkinThickness"]=patient_measurement.skin_thickness
+    # context["Insulin"]=patient_measurement.insulin
+    # context["BMI"]=patient_measurement.bmi
+    # context["DiabetesPedigreeFunction"]=patient_measurement.diabetes_predigree_function
+    # context["Age"]=patient_measurement.age
+
+
+    context["Possibility"]=request.POST.get('Possibility')
     context["DoctorComments"]=request.POST.get('DoctorComments')
     return render(request, 'd_final_result.html', context)
 
@@ -176,7 +193,8 @@ def p_final_result(request):
 
 def p_dashboard(request):
     context={}
-    records = Report.objects.all()
+    records = Report.objects.get(patient=context['patient_id'])
+    print("%%%%%"+records)
     context["records"]=records
     return render(request, 'p_dashboard.html',context)
 
