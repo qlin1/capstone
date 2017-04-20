@@ -7,9 +7,9 @@
 <body>
     <h1 style="text-align:center">Disease Prediction and Management Application</h1>
     <label>Patient ID:</label>
-    <form method="post" action="{% url 'tool' %}">
+    <form method="post" action="{% url 'tool'%}">
         {% csrf_token %}
-        <input type="input" name="p_id" required="required" />
+        <input type="input" name="patient_id" required="required" />
         <br> </br>
         <br> </br>
         <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>

@@ -9,9 +9,12 @@
     <div>
         <button>Disease Prediction Tool</button>
         <button>Results</button>
-        <button>Dashboard</button>
+        <form action="{% url 'dashboard' patient_id%}" method="post">
+            <button>Dashboard</button>
+            {% csrf_token %}
+        </form>
     </div>
-    <form action="{% url 'result' %}" method="post">
+    <form action="{% url 'result' patient_id%}" method="post">
         <select name="disease">
             <option value="diabetes">Diabetes</option>
             <option value="heartdisease">Heart Disease</option>
