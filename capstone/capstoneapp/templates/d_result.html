@@ -20,7 +20,7 @@
         <p>BMI: {{BMI}}</p>
         <p>Diabetes Pedigree Function: {{DiabetesPedigreeFunction}}</p>
         <h3>Doctor Comments:{{DoctorComments}}</h3>
-        <form action="{% url 'comment' patient_id%}" method="post">
+        <form action="{% url 'comment' report_id%}" method="post">
             <!--{{ comment.content.errors }}-->
             <input type="text" name="DoctorComments" value="{{ form }}"><br><br><br>
                 {{ comment.content }}
@@ -35,7 +35,7 @@
         <p>This patient has {{Possibility}}% of having Diabetes.</p>
         <br>
         <h3>Suggestion:</h3>
-        <p>Giving Metformin oral or Humulin R Injection.</p>
+        <p>{{Suggestion}}</p>
     </div>
 </body>
 </html>

@@ -57,7 +57,7 @@ def result(request, id):
     Age=patient_measurement.age
     Outcome=1
 
-    measurement = "Pregnancies "+str(Pregnancies)+"Glucose "+str(Glucose)+"BloodPressure "+str(BloodPressure)+"SkinThickness "+str(SkinThickness)+"Insulin "+str(Insulin)+"BMI "+str(BMI)+"DiabetesPedigreeFunction "+str(DiabetesPedigreeFunction)+"Age "+str(Age)
+    measurement = "Pregnancies "+str(Pregnancies)+" Glucose "+str(Glucose)+" BloodPressure "+str(BloodPressure)+" SkinThickness "+str(SkinThickness)+" Insulin "+str(Insulin)+" BMI "+str(BMI)+" DiabetesPedigreeFunction "+str(DiabetesPedigreeFunction)+" Age "+str(Age)
     DoctorComments=""
 
     data =  {
@@ -122,10 +122,12 @@ def result(request, id):
     context["Possibility"]=finalResult
     prediction=finalResult
     suggestion="Giving Metformin oral or Humulin r injection"
+    context["Suggestion"]=suggestion
 
     report = Report(patient=patient, report_id=report_id,date=r_date, measurement=measurement, prediction=prediction, suggestion=suggestion, comments=DoctorComments)
     report.save()
-
+    print("rep_mea:  "+report.measurement)
+    context["report_id"]=report_id
 
     # report = Report.objects.get(id=id)
     # print(report.count())
@@ -168,23 +170,6 @@ def tool(request):
 
 
     patient_id = request.POST.get('patient_id')
-    # patient = Patient.objects.get(patient_id=patient_id)
-    # report = Report.objects.filter(patient=patient)
-    # count = report.count()
-    # r_num = "%05d" % (count+1)
-    # print("report num:")
-    # print(count)
-    # print(r_num)
-    # report_id = "P"+patient_id+"587R"+r_num
-    # print("report id:")
-    # print(report_id)
-    # r_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    # print("report date:")
-    # print(r_date)
-    #
-    # r = Report(patient=patient, report_id=report_id,date=r_date)
-    # r.save()
-
     content['patient_id'] = patient_id
     print("patientid"+content['patient_id'])
     return render(request,'tool.html', content)
@@ -221,31 +206,78 @@ def login(request):
 
 def comment(request, id):
     context={}
-    record=Report.objects.get(report_id=id)
-    context["patient_id"]=record.patient.patient_id
-    context["Pregnancies"]=record.measurement.sub
-    context["Glucose"]=record.measurement
-    context["BloodPressure"]=record.measurement
-    context["SkinThickness"]=record.measurement
-    context["Insulin"]=record.measurement
-    context["BMI"]=record.measurement
-    context["DiabetesPedigreeFunction"]=record.measurement
-    context["Age"]=record.measurement
 
-    # patient_measurement = Measurement.objects.get(patient=patient)
-    # context["patient_id"]=id
-    # context["Pregnancies"]=patient_measurement.pregnancies
-    # context["Glucose"]=patient_measurement.glucose
-    # context["BloodPressure"]=patient_measurement.blood_pressure
-    # context["SkinThickness"]=patient_measurement.skin_thickness
-    # context["Insulin"]=patient_measurement.insulin
-    # context["BMI"]=patient_measurement.bmi
-    # context["DiabetesPedigreeFunction"]=patient_measurement.diabetes_predigree_function
-    # context["Age"]=patient_measurement.age
+    report = Report.objects.get(report_id=id)
 
+    measurement = report.measurement
+    print("measurement: "+measurement)
+    m_list=measurement.split(" ")
+    Pregnancies = m_list[1]
+    print("Pregnancies: "+Pregnancies)
+    Glucose = m_list[3]
+    BloodPressure = m_list[5]
+    SkinThickness = m_list[7]
+    Insulin = m_list[9]
+    BMI =m_list[11]
+    DiabetesPedigreeFunction = m_list[13]
+    Age = m_list[15]
 
-    context["Possibility"]=request.POST.get('Possibility')
+    context["patient_id"]=report.patient.patient_id
+    context["Pregnancies"]=Pregnancies
+    context["Glucose"]=Glucose
+    context["BloodPressure"]=BloodPressure
+    context["SkinThickness"]=SkinThickness
+    context["Insulin"]=Insulin
+    context["BMI"]=BMI
+    context["DiabetesPedigreeFunction"]=DiabetesPedigreeFunction
+    context["Age"]=Age
+
+    context["Possibility"]=report.prediction
+    context["Suggestion"]=report.suggestion
     context["DoctorComments"]=request.POST.get('DoctorComments')
+    report.comments = request.POST.get('DoctorComments')
+    return render(request, 'd_final_result.html', context)
+
+def final_result(request, id):
+    context={}
+    print("p id: "+id)
+    patient = Patient.objects.get(patient_id=id)
+    count = Report.objects.filter(patient=patient).count()
+    print("count: "+str(count))
+    r_num = "%05d" % count
+    print("r_num: "+r_num)
+    report_id = "P"+id+"587R"+r_num
+    print("report_id: "+report_id)
+    report = Report.objects.get(report_id=report_id)
+    print(report.measurement)
+
+    measurement = report.measurement
+    print("measurement: "+measurement)
+    m_list=measurement.split(" ")
+    Pregnancies = m_list[1]
+    print("Pregnancies: "+Pregnancies)
+    Glucose = m_list[3]
+    BloodPressure = m_list[5]
+    SkinThickness = m_list[7]
+    Insulin = m_list[9]
+    BMI =m_list[11]
+    DiabetesPedigreeFunction = m_list[13]
+    Age = m_list[15]
+
+
+    context["patient_id"]=id
+    context["Pregnancies"]=Pregnancies
+    context["Glucose"]=Glucose
+    context["BloodPressure"]=BloodPressure
+    context["SkinThickness"]=SkinThickness
+    context["Insulin"]=Insulin
+    context["BMI"]=BMI
+    context["DiabetesPedigreeFunction"]=DiabetesPedigreeFunction
+    context["Age"]=Age
+
+    context["Possibility"]=report.prediction
+    context["Suggestion"]=report.suggestion
+    context["DoctorComments"]=report.comments
     return render(request, 'd_final_result.html', context)
 
 def p_final_result(request):
