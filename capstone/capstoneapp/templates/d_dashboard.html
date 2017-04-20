@@ -56,7 +56,11 @@
 
                 </th>
                 <th>
-                    <a href="comment">Diabetes Report</a>
+                    <!--<a href="comment">Diabetes Report</a>-->
+                    <form action="{% url 'final_result' patient_id%}" method="post">
+                        <button>Diabetes Reports</button>
+                        {% csrf_token %}
+                    </form>
                     {% empty %}
 
                 </th>

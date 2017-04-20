@@ -129,24 +129,16 @@ def result(request, id):
     print("rep_mea:  "+report.measurement)
     context["report_id"]=report_id
 
-    # report = Report.objects.get(id=id)
-    # print(report.count())
-    # report_id = "P"+patient_id
-    # r = Report(patient=patient, report_id="D100058700014",date="2017-04-20 20:20:52",measurement="Pregnancies 100 Glucose 100 BloodPressure 100 SkinThickness 100",prediction="100%",suggestion="Giving Metformin oral or Humulin r injection",comments="")
-    # r.save()
     return render(request, 'd_result.html', context)
 
-    # records = Report.objects.all()
-    # context["records"]=records
-    # return render(request, 'd_dashboard.html', context)
 
 def dashboard(request, id):
     context={}
-    # r=Report(report_id="D100058700010",date="2017-03-28 20:20:52",measurement="Pregnancies 15 Glucose 194 BloodPressure 72 SkinThickness 35",prediction="89%",suggestion="Giving Metformin oral or Humulin r injection",comments="")
-    # r.save()
+
     patient = Patient.objects.get(patient_id=id)
     records = Report.objects.filter(patient=patient)
     context["records"]=records
+    context["patient_id"]=id
     return render(request, 'd_dashboard.html',context)
 
 def tool(request):
@@ -236,6 +228,10 @@ def comment(request, id):
     context["Suggestion"]=report.suggestion
     context["DoctorComments"]=request.POST.get('DoctorComments')
     report.comments = request.POST.get('DoctorComments')
+    report.save()
+
+    # Report.objects.get(report_id=id).update(comments=request.POST.get('DoctorComments'))
+
     return render(request, 'd_final_result.html', context)
 
 def final_result(request, id):
