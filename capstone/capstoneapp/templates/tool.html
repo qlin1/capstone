@@ -11,8 +11,11 @@
         </br>
         </br>
         </br>
-        <h1><font size="5">Disease Prediction and Management Application&nbsp; &nbsp; &nbsp;</font>
-            <a href="{% url 'login' %}" class="button1">Sign Out</a>
+        <h1>
+            <font size="5">
+                Disease Prediction and Management Application&nbsp; &nbsp; &nbsp;
+            </font>
+            <a href="{% url 'dashboard' patient_id %}" class="button1">Sign Out</a>
         </h1>
     </div>
     <div>
@@ -24,9 +27,10 @@
                 <!--<button type="submit" style="width:150px" class="btn btn-primary btn-large">Results</button>-->
                 <!--{% csrf_token %}-->
             <!--</form>-->
-            <button class="btn btn-primary btn-block btn-large"><a  style="width:150px" >Prediction Tool</a></button>
-            <a href="{% url 'final_result' patient_id %}" style="width:150px" class="btn btn-primary btn-block btn-large">Results</a>
-            <a href="{% url 'dashboard' patient_id %}" style="width:150px" class="btn btn-primary btn-block btn-large">Dashboard</a>
+            <!--< button class="btn btn-primary btn-block btn-large"><a  style="width:150px" >Prediction Tool</a></abutton>-->
+            <a style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large">Prediction Tool</a>
+            <a href="{% url 'login' %}" style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large">Results</a>
+            <a href="{% url 'dashboard' patient_id %}" style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large ">Dashboard</a>
             <!--<a href="{% url 'dashboard' patient_id%}" class="btn btn-primary btn-block btn-large">Dashboard</a>-->
             <!--<form action="{% url 'dashboard' patient_id%}" method="post">-->
                 <!--<button type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Dashboard</button>-->
@@ -34,16 +38,23 @@
             <!--</form>-->
         </div>
     </div>
+    <br>
 
     <div class="login">
+
+        <br>
+        <br>
+        <br>
         <form action="{% url 'result' patient_id%}" method="post">
-            <select name="disease">
+            <select style="width:300px;height:30px;margin-right:20px name="disease">
                 <option value="diabetes">Diabetes</option>
                 <option value="heartdisease">Heart Disease</option>
                 <option value="cad">Coronary Artery Disease</option>
                 <option value="copd">Chronic Obstructive Pulmonary Disease </option>
             </select>
             <br>
+            <br>
+
             <input type="submit" class="btn btn-primary btn-block btn-large" name="calculate" value="Calculate">
 
             {% csrf_token %}

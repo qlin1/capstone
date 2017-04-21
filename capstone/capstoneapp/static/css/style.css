@@ -18,7 +18,15 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
 }
-
+.heading {
+	position: absolute;
+	top: 50%;
+	left: 45%;
+	margin: -200px 0 0 -200px;
+	width:600px;
+	height:800px;
+}
+.heading h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:left; }
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
