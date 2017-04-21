@@ -33,8 +33,8 @@ def result(request, id):
     print(patient_measurement.age)
     print(patient_measurement.height)
 
-    report = Report.objects.filter(patient=patient)
-    count = report.count()
+    reports = Report.objects.filter(patient=patient)
+    count = reports.count()
     r_num = "%05d" % (count+1)
     print("report num:")
     print(count)
@@ -124,8 +124,8 @@ def result(request, id):
     suggestion="Giving Metformin oral or Humulin r injection"
     context["Suggestion"]=suggestion
 
-    # report = Report(patient=patient, report_id=report_id,date=r_date, measurement=measurement, prediction=prediction, suggestion=suggestion, comments=DoctorComments)
-    # report.save()
+    report = Report(patient=patient, report_id=report_id,date=r_date, measurement=measurement, prediction=prediction, suggestion=suggestion, comments=DoctorComments)
+    report.save()
     print("rep_mea:  "+report.measurement)
     context["report_id"]=report_id
 
