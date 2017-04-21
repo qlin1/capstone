@@ -278,7 +278,6 @@ def final_result(request, id):
 
 def p_final_result(request,id):
     context={}
-
     report = Report.objects.get(report_id=id)
 
     measurement = report.measurement
@@ -306,11 +305,7 @@ def p_final_result(request,id):
 
     context["Possibility"]=report.prediction
     context["Suggestion"]=report.suggestion
-    context["DoctorComments"]=request.POST.get('DoctorComments')
-    report.comments = request.POST.get('DoctorComments')
-    report.save()
-
-    # Report.objects.get(report_id=id).update(comments=request.POST.get('DoctorComments'))
+    context["DoctorComments"]=report.comments
 
     return render(request, 'p_final_result.html', context)
 
