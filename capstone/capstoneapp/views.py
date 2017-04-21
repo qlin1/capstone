@@ -145,6 +145,7 @@ def tool(request):
     content={}
 
     # Report.objects.all().delete()
+    # Report.objects.get(report_id="P1000587R00001").delete()
     # Measurement.objects.all().delete()
     # test=Measurement.objects.all().count()
     # print("delete m")
@@ -306,6 +307,8 @@ def p_final_result(request,id):
     context["Possibility"]=report.prediction
     context["Suggestion"]=report.suggestion
     context["DoctorComments"]=report.comments
+    context["report_id"]=report.report_id
+    context["report_date"]=report.date
 
     return render(request, 'p_final_result.html', context)
 
