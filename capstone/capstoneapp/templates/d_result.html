@@ -241,9 +241,9 @@
     <h1 style= "text-align:center"><font size="5">Disease Prediction and Management Application</font></h1>
     <br/>
     <div align="center">
-        <button type="submit" style="margin-right:20px;width:150px" class="btn btn-primary btn-block btn-large">Prediction Tool</button>
-        <button type="submit" style="margin-right:20px;width:150px" class="btn btn-primary btn-block btn-large">Results</button>
-        <button type="submit" style="margin-right:20px;width:150px" class="btn btn-primary btn-block btn-large">Dashboard</button>
+        <a style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large" href="{% url 'tool2' patient_id%}">Prediction Tool</a>
+        <a style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large" href="{% url 'dashboard' patient_id %}">Result</a>
+        <button type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Dashboard</button>
     </div>
     <br/>
     <h2 style= "text-align:center; font-size: medium">Patient ID: {{patient_id}}</h2>

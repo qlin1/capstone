@@ -248,9 +248,9 @@
 
     <br/>
     <div align="center">
-        <button type="submit" style="margin-right:20px;width:150px" class="btn btn-primary btn-block btn-large">Prediction Tool</button>
+        <a href="{% url 'tool2' patient_id%}" type="submit"style="margin-right:20px;width:150px" class="btn btn-primary btn-block btn-large">Prediction Tool</a>
         <button type="submit" style="margin-right:20px;width:150px" class="btn btn-primary btn-block btn-large">Results</button>
-        <button type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Dashboard</button>
+        <a href="{% url 'dashboard' patient_id %}" type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Dashboard</a>
     </div>
     <br/>
     <h2 style= "text-align:center; font-size: medium">Patient ID: {{patient_id}}</h2>

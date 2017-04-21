@@ -15,12 +15,12 @@
             <font size="5">
                 Disease Prediction and Management Application&nbsp; &nbsp; &nbsp;
             </font>
-            <a href="{% url 'dashboard' patient_id %}" class="button1">Sign Out</a>
+            <a href="{% url 'login' %}" class="button1">Sign Out</a>
         </h1>
     </div>
-    <div>
+    <div align="center">
 
-        <div align="center">
+
             <!--<button type="submit" style="width:150px" class="btn btn-primary btn-large">Prediction Tool</button>-->
             </br>
             <!--<form action="{% url 'final_result' patient_id%}" method="post">-->
@@ -28,18 +28,20 @@
                 <!--{% csrf_token %}-->
             <!--</form>-->
             <!--< button class="btn btn-primary btn-block btn-large"><a  style="width:150px" >Prediction Tool</a></abutton>-->
+
             <a style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large">Prediction Tool</a>
-            <a href="{% url 'login' %}" style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large">Results</a>
-            <a href="{% url 'dashboard' patient_id %}" style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large ">Dashboard</a>
+
+            <a style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large" href="{% url 'final_result' patient_id %}">Result</a>
+            <a href="{% url 'dashboard' patient_id %}"  class="btn btn-primary btn-block btn-large">Dashboard</a>
             <!--<a href="{% url 'dashboard' patient_id%}" class="btn btn-primary btn-block btn-large">Dashboard</a>-->
             <!--<form action="{% url 'dashboard' patient_id%}" method="post">-->
                 <!--<button type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Dashboard</button>-->
                 <!--{% csrf_token %}-->
             <!--</form>-->
-        </div>
+
     </div>
     <br>
-
+    <div>
     <div class="login">
 
         <br>
@@ -59,6 +61,7 @@
 
             {% csrf_token %}
         </form>
+    </div>
     </div>
 </body>
 </html>

@@ -334,8 +334,8 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
     </div>
     <div align="center">
         </br>
-        <button type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Prediction Tool</button>
-        <button type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Result</button>
+        <a style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large" href="{% url 'tool2' patient_id%}">Prediction Tool</a>
+        <a style="width:150px;margin-right:20px" class="btn btn-primary btn-block btn-large" href="{% url 'final_result' patient_id %}">Result</a>
         <button type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Dashboard</button>
         </br>
     </div>
