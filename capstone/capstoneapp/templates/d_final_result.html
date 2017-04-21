@@ -36,7 +36,7 @@
 
 <!DOCTYPE html>
 <html xmlns:height="http://www.w3.org/1999/xhtml" xmlns:visibility="http://www.w3.org/1999/xhtml"
-      xmlns:margin-bottom="http://www.w3.org/1999/xhtml">
+      xmlns:margin-bottom="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Results Page</title>
@@ -257,13 +257,13 @@
     <hr style="height:0.1px; visibility:hidden; margin-bottom:-1px"></hr>
     <h2 style= "text-align:center; font-size: medium">Disease Type: Diabetes</h2>
     <hr style="height:0.1px; visibility:hidden; margin-bottom:-1px"></hr>
-    <h2 style= "text-align:center; font-size: medium"> <b>Report ID: </b>{{report_id}} |<b> Report Date </b> {{ report_date }}</h2>
+    <h2 style= "text-align:center; font-size: medium"> <br>Report ID: </br>{{report_id}}<br> Report Date </br> {{report_date}}</h2>
 </div>
 
 <a class="logo" href="">Logo</a>
 
 <div style="float: left" class = "indicators">
-    <h1 style="text-align: left"> <font size="3" color="#82E0AA"><b> Disease Indicators: </b></font></h1>
+    <h1 style="text-align: left"> <font size="3" color="#82E0AA"><br> Disease Indicators: </br></font></h1>
     <p style ="color: white">Age: {{Age}}</p>
     <p style ="color: white">Pregnancies: {{Pregnancies}}</p>
     <p style ="color: white">Glucose: {{Glucose}}</p>
@@ -272,16 +272,16 @@
     <p style ="color: white">Insulin: {{Insulin}}</p>
     <p style ="color: white">BMI: {{BMI}}</p>
     <p style ="color: white">Diabetes Pedigree Function: {{DiabetesPedigreeFunction}}</p>
-    <h2 style ="text-align: left; color: #82E0AA; font-size:medium"><b> Comments:</b> </h2>
-    <p id="comment_text" style ="border:1.5px; border-style:solid; border-color:#29a4c1; padding:0.5em;color: white; text-align: justify"> {{DoctorComments}}<br></p>
+    <h2 style ="text-align: left; color: #82E0AA; font-size:medium"><br> Comments:</br> </h2>
+    <p id="comment_text" style ="border:1.5px; border-style:solid; border-color:#29a4c1; padding:0.5em;color: white; text-align: justify"> <br>{{DoctorComments}}<br></p>
 </div>
 
 <div style="float: right" class="predictions">
-    <h2 style="color:#82E0AA; font-size: medium; text-align: left"><b>Prediction:</b></h2>
+    <h2 style="color:#82E0AA; font-size: medium; text-align: left"><br>Prediction:</br></h2>
     <p style="color: white"> <font size="3">This patient has {{Possibility}}% of having Diabetes.</font></p>
     <br/>
     <br/>
-    <h2 style="text-align: left;color:#82E0AA; font-size: medium"><b>Suggestions:</b></h2>
+    <h2 style="text-align: left;color:#82E0AA; font-size: medium"><br>Suggestions:</br></h2>
     <p style="color: white"> <font size="3">{{Suggestion}}</font></p>
 </div>
 
