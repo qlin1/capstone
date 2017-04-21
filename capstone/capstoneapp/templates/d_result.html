@@ -1,41 +1,292 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Result Page</title>-->
+<!--</head>-->
+<!--<body>-->
+    <!--<h1 style="text-align:center">Disease Prediction and Management Application</h1>-->
+    <!--<h2 style="text-align:center">Patient ID: {{patient_id}}</h2>-->
+    <!--<h2 style="text-align:center">Disease Type: Diabetes</h2>-->
+    <!--<div style="float: left">-->
+        <!--<h3>Disease Indicators:</h3>-->
+
+        <!--<p>Age: {{Age}}</p>-->
+        <!--<p>Pregnancies: {{Pregnancies}}</p>-->
+        <!--<p>Glucose: {{Glucose}}</p>-->
+        <!--<p>Blood Pressure: {{BloodPressure}}</p>-->
+        <!--<p>Skin Thickness: {{SkinThickness}}</p>-->
+        <!--<p>Insulin: {{Insulin}}</p>-->
+        <!--<p>BMI: {{BMI}}</p>-->
+        <!--<p>Diabetes Pedigree Function: {{DiabetesPedigreeFunction}}</p>-->
+        <!--<h3>Doctor Comments:{{DoctorComments}}</h3>-->
+        <!--<form action="{% url 'comment' report_id%}" method="post">-->
+            <!--&lt;!&ndash;{{ comment.content.errors }}&ndash;&gt;-->
+            <!--<input type="text" name="DoctorComments" value="{{ form }}"><br><br><br>-->
+                <!--{{ comment.content }}-->
+            <!--<button type="submit" name="action">Comment</button>-->
+            <!--{% csrf_token %}-->
+        <!--</form>-->
+        <!--<br>-->
+
+    <!--</div>-->
+    <!--<div style="float: right">-->
+        <!--<h3>Prediction:</h3>-->
+        <!--<p>This patient has {{Possibility}}% of having Diabetes.</p>-->
+        <!--<br>-->
+        <!--<h3>Suggestion:</h3>-->
+        <!--<p>{{Suggestion}}</p>-->
+    <!--</div>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:height="http://www.w3.org/1999/xhtml" xmlns:visibility="http://www.w3.org/1999/xhtml"
+      xmlns:margin-bottom="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Result Page</title>
+    <title>Results Page</title>
+    <!-- Compiled and minified CSS -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+    <style>
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+
+        body {
+            line-height: 0;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        blockquote, q {
+            quotes: none;
+        }
+
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 1;
+        }
+
+        body {
+            font: 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #404040;
+            background: #2d4259;
+        }
+
+
+        input {
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+
+
+
+        @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+        .btn {  *display: inline; *zoom: 1; padding: 4px 10px 4px; margin-bottom: 0; font-size: 13px; line-height: 18px; color: #333333; text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; background-color: #f5f5f5; background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); background-image: linear-gradient(top, #ffffff, #e6e6e6); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0); border-color: #e6e6e6 #e6e6e6 #e6e6e6; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border: 1px solid #e6e6e6; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer; *margin-left: .3em; }
+        .btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { background-color: #e6e6e6; }
+        .btn-large { padding: 9px 14px; font-size: 15px; line-height: normal; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
+        .btn:hover { color: #333333; text-decoration: none; background-color: #e6e6e6; background-position: 0 -15px; -webkit-transition: background-position 0.1s linear; -moz-transition: background-position 0.1s linear; -ms-transition: background-position 0.1s linear; -o-transition: background-position 0.1s linear; transition: background-position 0.1s linear; }
+        .btn-primary, .btn-primary:hover { text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); color: #ffffff; }
+        .btn-primary.active { color: rgba(255, 255, 255, 0.75); }
+        .btn-primary { background-color: #4a77d4; background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4); background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4)); background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4); background-image: -o-linear-gradient(top, #6eb6de, #4a77d4); background-image: linear-gradient(top, #6eb6de, #4a77d4); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);  border: 1px solid #3762bc; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5); }
+        .btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { filter: none; background-color: #4a77d4; }
+
+        * { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
+
+        html { width: 100%; height:100%; overflow:hidden; }
+        body {
+            width: 100%;
+            height:100%;
+            font-family: 'Open Sans', sans-serif;
+            background: #092756;
+            background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+            background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+        }
+        .result {
+            position: absolute;
+            top: 5%;
+            left: 25%;
+            margin: 0px 0px 0px 0px;
+            width:600px;
+            height:100px;
+        }
+        .result h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; }
+        .result h2 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px}
+
+        br {
+            line-height:30%;
+        }
+
+        .image {
+            background-image: url("../static/images/logo.jpg");
+            width: 300px;
+            height: 100px;
+            margin: 5px 5px 5px 5px;
+            padding: 0;
+        }
+
+        .indicators {
+            position: absolute;
+            top:29%;
+            left: 15%;
+            width:500px;
+            height:500px;
+            margin: 10px 10px 10px 10px;
+        }
+
+        .predictions {
+            position: absolute;
+            top:32%;
+            right: 0%;
+            width:500px;
+            height:500px;
+            margin: 20px 20px 20px 20px;
+        }
+
+        p {
+            display: block;
+            -webkit-margin-before: 0.5em;
+            -webkit-margin-after: 0.5em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+        }
+        input[type=textarea] {
+            width: 120%;
+            box-sizing: content-box;
+            background-color: rgba(0, 0, 0, 0.298039);
+
+        }
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.3);
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            border: 1px solid rgba(0,0,0,0.3);
+            border-radius: 4px;
+            box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+            -webkit-transition: box-shadow .5s ease;
+            -moz-transition: box-shadow .5s ease;
+            -o-transition: box-shadow .5s ease;
+            -ms-transition: box-shadow .5s ease;
+            transition: box-shadow .5s ease;
+        }
+        input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
+        .logo {
+            background: url("../static/images/newroundlogo1.jpg") no-repeat;
+            width: 200px;
+            height: 200px;
+            display: block;
+            margin-left: 40px;
+            margin-top: 10px;
+            text-indent: -9999px;}
+
+
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
 </head>
-<body>
-    <h1 style="text-align:center">Disease Prediction and Management Application</h1>
-    <h2 style="text-align:center">Patient ID: {{patient_id}}</h2>
-    <h2 style="text-align:center">Disease Type: Diabetes</h2>
-    <div style="float: left">
-        <h3>Disease Indicators:</h3>
 
-        <p>Age: {{Age}}</p>
-        <p>Pregnancies: {{Pregnancies}}</p>
-        <p>Glucose: {{Glucose}}</p>
-        <p>Blood Pressure: {{BloodPressure}}</p>
-        <p>Skin Thickness: {{SkinThickness}}</p>
-        <p>Insulin: {{Insulin}}</p>
-        <p>BMI: {{BMI}}</p>
-        <p>Diabetes Pedigree Function: {{DiabetesPedigreeFunction}}</p>
-        <h3>Doctor Comments:{{DoctorComments}}</h3>
-        <form action="{% url 'comment' report_id%}" method="post">
-            <!--{{ comment.content.errors }}-->
-            <input type="text" name="DoctorComments" value="{{ form }}"><br><br><br>
-                {{ comment.content }}
-            <button type="submit" name="action">Comment</button>
-            {% csrf_token %}
-        </form>
-        <br>
+<body background="https://karimikagwe.files.wordpress.com/2015/08/shutterstock_166545062.jpg">
 
+<div class="result">
+    <h1 style= "text-align:center"><font size="5">Disease Prediction and Management Application</font></h1>
+    <br/>
+    <div align="center">
+        <button type="submit" style="margin-right:20px;width:150px" class="btn btn-primary btn-block btn-large">Prediction Tool</button>
+        <button type="submit" style="margin-right:20px;width:150px" class="btn btn-primary btn-block btn-large">Results</button>
+        <button type="submit" style="margin-right:20px;width:150px" class="btn btn-primary btn-block btn-large">Dashboard</button>
     </div>
-    <div style="float: right">
-        <h3>Prediction:</h3>
-        <p>This patient has {{Possibility}}% of having Diabetes.</p>
-        <br>
-        <h3>Suggestion:</h3>
-        <p>{{Suggestion}}</p>
-    </div>
+    <br/>
+    <h2 style= "text-align:center; font-size: medium">Patient ID: {{patient_id}}</h2>
+    <hr style="height:0.01px; visibility:hidden; margin-bottom:-1px"></hr>
+    <h2 style= "text-align:center; font-size: medium">Disease Type: Diabetes</h2>
+</div>
+
+<a class="logo" href="">Logo</a>
+
+
+<div style="float: left" class = "indicators">
+    <h1 style="text-align: left"> <font size="3" color="#82E0AA"><b> Disease Indicators: </b></font></h1>
+    <p style ="color: white">Age: {{Age}}</p>
+    <p style ="color: white">Pregnancies: {{Pregnancies}}</p>
+    <p style ="color: white">Glucose: {{Glucose}}</p>
+    <p style ="color: white">Blood Pressure: {{BloodPressure}}</p>
+    <p style ="color: white">Skin Thickness: {{SkinThickness}}</p>
+    <p style ="color: white">Insulin: {{Insulin}}</p>
+    <p style ="color: white">BMI: {{BMI}}</p>
+    <p style ="color: white">Diabetes Pedigree Function: {{DiabetesPedigreeFunction}}</p>
+    <h2 style ="text-align: left; color: #82E0AA; font-size:medium"><b> Comments:</b>{{DoctorComments}} </h2>
+    <hr style="height:0.01px; visibility:hidden; margin-bottom:-1px"></hr>
+    <form action="{% url 'comment' report_id%}" method="post">
+        <input type="textarea" style="font-size:medium; height:40px" id="comments" name="DoctorComments" value="{{ form }}"><br><br><br>
+        {{ comment.content }}
+        {% csrf_token %}
+
+        <div align="left">
+            <button type="submit" name="action" style="width:75px" class="btn btn-primary btn-block btn-large">Save</button>
+        </div>
+    </form>
+</div>
+
+<div style="float: right" class="predictions">
+    <h2 style="color:#82E0AA; font-size: medium; text-align: left"><b>Prediction:</b></h2>
+    <p style="color: white"> <font size="3">This patient has {{Possibility}}% of having Diabetes.</font></p>
+    <br/>
+    <br/>
+    <h2 style="text-align: left;color:#82E0AA; font-size: medium"><b>Suggestions:</b></h2>
+    <p style="color: white"> <font size="3">{{Suggestion}}</font></p>
+</div>
+
+
+<script src="js/index.js"></script>
 </body>
 </html>

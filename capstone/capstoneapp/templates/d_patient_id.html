@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Tool Page</title>
+    <link href="../../static/css/style.css" rel="stylesheet">
 </head>
-<body>
-    <h1 style="text-align:center">Disease Prediction and Management Application</h1>
-    <label>Patient ID:</label>
-    <form method="post" action="{% url 'tool'%}">
-        {% csrf_token %}
-        <input type="input" name="patient_id" required="required" />
-        <br> </br>
-        <br> </br>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
-    </form>
+<body style = "color:white">
+    <div align="center" style = "color:white">
+        </br>
+        </br>
+        </br>
+        </br>
+        <h1><font size="5">Disease Prediction and Management Application&nbsp; &nbsp;</font>
+            <a href="{% url 'tool' %}" class="button1">Sign Out</a>
+
+    </div>
+    <div class="login">
+        </br>
+        </br>
+        <form method="post" action="{% url 'tool' %}">
+            {% csrf_token %}
+            <input type="input" name="patient_id" required="required" placeholder="PatientID" />
+            <br> </br>
+            <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+        </form>
+    </div>
+
 </head>
 </body>
+
 </html>
+
