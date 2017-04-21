@@ -275,6 +275,8 @@ def final_result(request, id):
     context["Possibility"]=report.prediction
     context["Suggestion"]=report.suggestion
     context["DoctorComments"]=report.comments
+    context["report_id"]=report.report_id
+    context["report_date"]=report.date
     return render(request, 'd_final_result.html', context)
 
 def p_final_result(request,id):
