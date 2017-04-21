@@ -121,7 +121,14 @@ def result(request, id):
     context["DoctorComments"]=DoctorComments
     context["Possibility"]=finalResult
     prediction=finalResult
-    suggestion="Giving Metformin oral or Humulin r injection"
+    if float(prediction)<=12:
+        suggestion="Eat Health, work health."
+    elif float(prediction)<=24:
+        suggestion="Control sugar intake, increase the amount of exercise."
+    elif float(prediction)<=49:
+        suggestion="Do further check. May give Metformin oral or Humulin r injection."
+    else:
+        suggestion="Giving Metformin oral or Humulin r injection."
     context["Suggestion"]=suggestion
 
     report = Report(patient=patient, report_id=report_id,date=r_date, measurement=measurement, prediction=prediction, suggestion=suggestion, comments=DoctorComments)
@@ -166,6 +173,30 @@ def tool(request):
     content['patient_id'] = patient_id
     print("patientid"+content['patient_id'])
     return render(request,'tool.html', content)
+
+def tool2(request,id):
+    content={}
+
+    # Report.objects.all().delete()
+    # Report.objects.get(report_id="P1000587R00001").delete()
+    # Measurement.objects.all().delete()
+    # test=Measurement.objects.all().count()
+    # print("delete m")
+    # print(test)
+
+    # p=Patient.objects.get(patient_id="1000")
+    # m = Measurement(patient=p, age="50", height="178", weight="50", pregnancies="15", glucose="194", insulin="0", blood_pressure="72", skin_thickness="35", bmi="33.6", diabetes_predigree_function="0.627", heartbeat="87")
+    # m.save()
+    # p2=Patient.objects.get(patient_id="1001")
+    # m = Measurement(patient=p2, age="31", height="145", weight="70", pregnancies="0", glucose="138", insulin="0", blood_pressure="66", skin_thickness="29", bmi="26.6", diabetes_predigree_function="0.351", heartbeat="90")
+    # m.save()
+    # test1=Measurement.objects.all().count()
+    # print("add m")
+    # print(test1)
+    content['patient_id'] = id
+    print("patientid"+content['patient_id'])
+    return render(request,'tool.html', content)
+
 
 def role(request):
     context={}

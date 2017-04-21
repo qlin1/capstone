@@ -9,6 +9,7 @@ urlpatterns = [
 	url(r'^login$', views.login, name = 'login'),
 	url(r'^role$', views.role, name = 'role'),
 	url(r'^tool$', views.tool, name = 'tool'),
+	url(r'^tool2/(?P<id>\d+)$', views.tool2, name = 'tool2'),
 	url(r'^index$', views.index, name = 'index'),
 	url(r'^result/(?P<id>\d+)$', views.result, name = 'result'),
 	url(r'^comment/(?P<id>\w+)$', views.comment, name = 'comment'),
