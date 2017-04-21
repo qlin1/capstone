@@ -304,7 +304,16 @@ def p_final_result(request,id):
     context["DiabetesPedigreeFunction"]=DiabetesPedigreeFunction
     context["Age"]=Age
 
-    context["Possibility"]=report.prediction
+    possibility = report.prediction
+    if float(possibility)<=12:
+        context["Possibility"]="very less likely"
+    elif float(possibility)<=24:
+        context["Possibility"]="less likely"
+    elif float(possibility)<=49:
+        context["Possibility"]="likely"
+    else:
+        context["Possibility"]="highly likely"
+
     context["Suggestion"]=report.suggestion
     context["DoctorComments"]=report.comments
     context["report_id"]=report.report_id
