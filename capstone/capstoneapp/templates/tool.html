@@ -3,31 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Tool Page</title>
+    <link href="../../static/css/style1.css" rel="stylesheet">
 </head>
 <body>
-    <h1 style="text-align:center">Disease Prediction and Management Application</h1>
+    <div align="center" style = "color:white">
+        </br>
+        </br>
+        </br>
+        </br>
+        <h1><font size="5">Disease Prediction and Management Application&nbsp; &nbsp; &nbsp;</font>
+            <button href="login" class="button1">Sign Out</button></h1>
+    </div>
     <div>
-        <button>Disease Prediction Tool</button>
-        <form action="{% url 'final_result' patient_id%}" method="post">
-            <button>Results</button>
-            {% csrf_token %}
-        </form>
-        <form action="{% url 'dashboard' patient_id%}" method="post">
-            <button>Dashboard</button>
+
+        <div align="center">
+            <button type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Prediction Tool</button>
+            </br>
+            <form action="{% url 'final_result' patient_id%}" method="post">
+                <button type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Results</button>
+                {% csrf_token %}
+            </form>
+        </div>
+        <div align="center">
+            <!--<a href="{% url 'dashboard' patient_id%}" class="btn btn-primary btn-block btn-large">Dashboard</a>-->
+            <form action="{% url 'dashboard' patient_id%}" method="post">
+                <button type="submit" style="width:150px" class="btn btn-primary btn-block btn-large">Dashboard</button>
+                {% csrf_token %}
+            </form>
+        </div>
+    </div>
+    <div class="login">
+        <form action="{% url 'result' patient_id%}" method="post">
+            <select name="disease">
+                <option value="diabetes">Diabetes</option>
+                <option value="heartdisease">Heart Disease</option>
+                <option value="cad">Coronary Artery Disease</option>
+                <option value="copd">Chronic Obstructive Pulmonary Disease </option>
+            </select>
+            <br>
+            <input type="submit" class="btn btn-primary btn-block btn-large" name="calculate" value="Calculate">
+
             {% csrf_token %}
         </form>
     </div>
-    <form action="{% url 'result' patient_id%}" method="post">
-        <select name="disease">
-            <option value="diabetes">Diabetes</option>
-            <option value="heartdisease">Heart Disease</option>
-            <option value="cad">Coronary Artery Disease</option>
-            <option value="copd">Chronic Obstructive Pulmonary Disease </option>
-        </select>
-        <br>
-        <input type="submit" name="calculate" value="Calculate">
-
-        {% csrf_token %}
-    </form>
 </body>
 </html>

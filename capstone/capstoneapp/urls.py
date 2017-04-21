@@ -14,6 +14,6 @@ urlpatterns = [
 	url(r'^comment/(?P<id>\w+)$', views.comment, name = 'comment'),
 	url(r'^dashboard/(?P<id>\d+)$', views.dashboard, name = 'dashboard'),
 	url(r'^final_result/(?P<id>\d+)$', views.final_result, name = 'final_result'),
-	url(r'^p_final_result$', views.p_final_result, name = 'p_final_result'),
+	url(r'^p_final_result/(?P<id>\w+)$', views.p_final_result, name = 'p_final_result'),
 ]
 

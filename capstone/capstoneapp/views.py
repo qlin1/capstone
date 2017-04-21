@@ -124,8 +124,8 @@ def result(request, id):
     suggestion="Giving Metformin oral or Humulin r injection"
     context["Suggestion"]=suggestion
 
-    report = Report(patient=patient, report_id=report_id,date=r_date, measurement=measurement, prediction=prediction, suggestion=suggestion, comments=DoctorComments)
-    report.save()
+    # report = Report(patient=patient, report_id=report_id,date=r_date, measurement=measurement, prediction=prediction, suggestion=suggestion, comments=DoctorComments)
+    # report.save()
     print("rep_mea:  "+report.measurement)
     context["report_id"]=report_id
 
@@ -276,8 +276,42 @@ def final_result(request, id):
     context["DoctorComments"]=report.comments
     return render(request, 'd_final_result.html', context)
 
-def p_final_result(request):
+def p_final_result(request,id):
     context={}
+
+    report = Report.objects.get(report_id=id)
+
+    measurement = report.measurement
+    print("measurement: "+measurement)
+    m_list=measurement.split(" ")
+    Pregnancies = m_list[1]
+    print("Pregnancies: "+Pregnancies)
+    Glucose = m_list[3]
+    BloodPressure = m_list[5]
+    SkinThickness = m_list[7]
+    Insulin = m_list[9]
+    BMI =m_list[11]
+    DiabetesPedigreeFunction = m_list[13]
+    Age = m_list[15]
+
+    context["patient_id"]=report.patient.patient_id
+    context["Pregnancies"]=Pregnancies
+    context["Glucose"]=Glucose
+    context["BloodPressure"]=BloodPressure
+    context["SkinThickness"]=SkinThickness
+    context["Insulin"]=Insulin
+    context["BMI"]=BMI
+    context["DiabetesPedigreeFunction"]=DiabetesPedigreeFunction
+    context["Age"]=Age
+
+    context["Possibility"]=report.prediction
+    context["Suggestion"]=report.suggestion
+    context["DoctorComments"]=request.POST.get('DoctorComments')
+    report.comments = request.POST.get('DoctorComments')
+    report.save()
+
+    # Report.objects.get(report_id=id).update(comments=request.POST.get('DoctorComments'))
+
     return render(request, 'p_final_result.html', context)
 
 def p_dashboard(request):
