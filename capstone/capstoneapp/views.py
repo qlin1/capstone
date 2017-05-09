@@ -193,10 +193,10 @@ def tool2(request,id):
     # test1=Measurement.objects.all().count()
     # print("add m")
     # print(test1)
+
     content['patient_id'] = id
     print("patientid"+content['patient_id'])
     return render(request,'tool.html', content)
-
 
 def role(request):
     context={}
