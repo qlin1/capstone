@@ -372,11 +372,11 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
                 </td>
                 <td>
-                    <!--<a href="comment">Diabetes Report</a>-->
-                    <form action="{% url 'final_result' patient_id%}" method="post">
-                        <button>Diabetes Reports</button>
-                        {% csrf_token %}
-                    </form>
+                    <a href="{% url 'd_final_result' record.report_id%}">Diabetes Report</a>
+                    <!--<form action="{% url 'd_final_result' record.report_id%}" method="post">-->
+                        <!--<button>Diabetes Reports</button>-->
+                        <!--{% csrf_token %}-->
+                    <!--</form>-->
                     {% empty %}
 
                 </td>

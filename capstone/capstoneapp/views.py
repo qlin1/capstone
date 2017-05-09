@@ -310,6 +310,41 @@ def final_result(request, id):
     context["report_date"]=report.date
     return render(request, 'd_final_result.html', context)
 
+def d_final_result(request, id):
+    context={}
+    report = Report.objects.get(report_id=id)
+
+    measurement = report.measurement
+    print("measurement: "+measurement)
+    m_list=measurement.split(" ")
+    Pregnancies = m_list[1]
+    print("Pregnancies: "+Pregnancies)
+    Glucose = m_list[3]
+    BloodPressure = m_list[5]
+    SkinThickness = m_list[7]
+    Insulin = m_list[9]
+    BMI =m_list[11]
+    DiabetesPedigreeFunction = m_list[13]
+    Age = m_list[15]
+
+
+    context["patient_id"]=report.patient.patient_id
+    context["Pregnancies"]=Pregnancies
+    context["Glucose"]=Glucose
+    context["BloodPressure"]=BloodPressure
+    context["SkinThickness"]=SkinThickness
+    context["Insulin"]=Insulin
+    context["BMI"]=BMI
+    context["DiabetesPedigreeFunction"]=DiabetesPedigreeFunction
+    context["Age"]=Age
+
+    context["Possibility"]=report.prediction
+    context["Suggestion"]=report.suggestion
+    context["DoctorComments"]=report.comments
+    context["report_id"]=report.report_id
+    context["report_date"]=report.date
+    return render(request, 'd_final_result.html', context)
+
 def p_final_result(request,id):
     context={}
     report = Report.objects.get(report_id=id)
@@ -339,9 +374,9 @@ def p_final_result(request,id):
 
     possibility = report.prediction
     if float(possibility)<=12:
-        context["Possibility"]="very less likely"
+        context["Possibility"]="highly unlikely"
     elif float(possibility)<=24:
-        context["Possibility"]="less likely"
+        context["Possibility"]="unlikely"
     elif float(possibility)<=49:
         context["Possibility"]="likely"
     else:
@@ -354,10 +389,11 @@ def p_final_result(request,id):
 
     return render(request, 'p_final_result.html', context)
 
-def p_dashboard(request):
+def p_dashboard(request, id):
     context={}
-    records = Report.objects.get(patient=context['patient_id'])
-    print("%%%%%"+records)
+    # records = Report.objects.get(patient=context['patient_id'])
+    patient = Patient.objects.get(patient_id=id)
+    records = Report.objects.filter(patient=patient)
     context["records"]=records
     return render(request, 'p_dashboard.html',context)
 

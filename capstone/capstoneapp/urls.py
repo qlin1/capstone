@@ -14,7 +14,9 @@ urlpatterns = [
 	url(r'^result/(?P<id>\d+)$', views.result, name = 'result'),
 	url(r'^comment/(?P<id>\w+)$', views.comment, name = 'comment'),
 	url(r'^dashboard/(?P<id>\d+)$', views.dashboard, name = 'dashboard'),
+	url(r'^p_dashboard/(?P<id>\d+)$', views.p_dashboard, name = 'p_dashboard'),
 	url(r'^final_result/(?P<id>\d+)$', views.final_result, name = 'final_result'),
+	url(r'^d_final_result/(?P<id>\w+)$', views.d_final_result, name = 'd_final_result'),
 	url(r'^p_final_result/(?P<id>\w+)$', views.p_final_result, name = 'p_final_result'),
 ]
 
